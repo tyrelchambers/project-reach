@@ -36,11 +36,11 @@ const Projects = () => {
           <div className="project-stats row">
             <div className="row ai-c">
               <i className="fas fa-fire icon-primary"></i>
-              <p>{x.likes}</p>
+              <p className="bold">{x.likes}</p>
             </div>
             <div className="row ai-c">
               <i className="far fa-comment light-grey"></i>
-              <p>{x.commentCount}</p>
+              <p className="bold">{x.commentCount}</p>
             </div>
           </div>
         </div>
