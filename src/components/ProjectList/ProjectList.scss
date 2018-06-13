@@ -1,0 +1,55 @@
+@import '../../colours.scss';
+
+.image.small {
+  width: 50px;
+  height: 50px;
+  margin-right: 1em;
+}
+
+.project__item {
+  width: 95%;
+  padding: 1em 0;
+  > div {
+    width: 100%;
+  }
+
+  h3 {
+    margin: 0.2em;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  &:not(:last-child) {
+    border-bottom: 1px solid $hr;
+  }
+}
+
+.project-list {
+  padding: 2em;
+  background-color: lighten($hr, 5%);
+  
+}
+
+.projects {
+  width: 100%;
+ 
+  background-color: white;
+  border: 1px solid $hr;
+  border-radius: 5px;
+  > h3 {
+    padding: 1em 2em;
+    margin: 0;
+    border-bottom: 1px solid $hr;
+  }
+}
+
+.project-stats {
+  display: flex;
+  justify-content: flex-end;
+  p {
+    margin-left: 0.5em;
+    margin-right: 1em;
+  }
+}

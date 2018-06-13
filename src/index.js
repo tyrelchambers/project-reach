@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
-import App from './App';
 import IndexPage from './pages/IndexPages/IndexPage';
 import Header from './layouts/Header/Header';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
