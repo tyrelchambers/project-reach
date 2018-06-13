@@ -1,4 +1,5 @@
 @import './colours.scss';
+@import './assets/stylesheets/btn.scss';
 
 body,
 html {
@@ -14,11 +15,16 @@ h4,
 h5,
 h6, 
 p {
-  color: $text-primary;
+  color: $primary;
+  
 }
 
 p {
   line-height: 1.8em;
+}
+
+.tc-c {
+  text-align: center;
 }
 
 .row {
@@ -38,8 +44,20 @@ p {
   justify-content: center;
 }
 
+.jc-sb {
+  justify-content: space-between;
+}
+
 .bold {
   font-weight: 700;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.padding {
+  padding: 2em;
 }
 
 .h-100 {

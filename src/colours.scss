@@ -1,7 +1,16 @@
-$hr: #e2e2e2;
-$text-primary: #1f1f1f;
-$text-secondary: #2ECC71;
+$hr: hsl(0, 0%, 90.9%);
+$primary: #1f1f1f;
+$secondary: #2ECC71;
+$icon-primary:  #F03434;
 
-.text-secondary {
-  color: $text-secondary;
+.secondary {
+  color: $secondary;
+}
+
+.icon-primary {
+  color: $icon-primary;
+}
+
+.light-grey {
+  color: lighten($primary, 15%);
 }
