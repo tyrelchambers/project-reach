@@ -7,10 +7,15 @@
   text-decoration: none;
   border-radius: 5px;
   box-shadow: 0px 3px 6px rgba(black, 0.3);
+  border: none;
+  transition: all 0.2s ease;
 }
 
 .btn-primary {
   background-color: $secondary;
   color: white;
   
+  &:hover {
+    background-color: darken($secondary, 10%);
+  }
 }
