@@ -4,9 +4,6 @@ import './ProjectList.scss';
 const projects = require('../../projects.json');
 
 export default class ProjectList extends Component {
-
-  
-
   render() {
     return(
       <div className="project-list">
