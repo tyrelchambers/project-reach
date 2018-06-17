@@ -1,0 +1,24 @@
+@import '../../../colours.scss';
+
+.subnav {
+  background-color: $primary;
+  box-shadow: 0px 1px 3px rgba(black, 0.4);
+}
+
+.subnav__item {
+  display: inline-flex;
+  padding: 1em;
+  color: white;
+  border-bottom: 2px solid transparent;
+  font-weight: 700;
+  font-size: 0.9rem;
+
+  i {
+    margin-bottom: 0.4em;
+    font-size: 1.2rem;
+  }
+  &:hover {
+    border-bottom: 2px solid $icon-primary;
+    color: $icon-primary;
+  }
+}
