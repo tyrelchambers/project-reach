@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { Provider } from 'mobx-react';
+import { ApolloClient, HttpLink, InMemoryCache } from 'apollo-boost';
+import { ApolloProvider } from 'react-apollo';
 
 import './index.scss';
 
@@ -10,16 +11,18 @@ import IndexPage from './pages/IndexPages/IndexPage';
 import Header from './layouts/Header/Header';
 import Dashboard from './pages/User/Dashboard/Dashboard';
 
-import AuthStore from './stores/AuthStore';
-
 import registerServiceWorker from './registerServiceWorker';
 
-const stores = {
-  AuthStore
-};
+const httpLink = new HttpLink({
+  uri: 'http://localhost:3001/graphql'
+});
 
+const client = new ApolloClient({
+  link: httpLink,
+  cache: new InMemoryCache()
+});
 ReactDOM.render(
-  <Provider {...stores}>
+  <ApolloProvider client={client}>
     <Router basename="/">
       <React.Fragment>
         <Header/>
@@ -28,7 +31,7 @@ ReactDOM.render(
         <Route exact path="/dashboard" component={Dashboard} />
       </React.Fragment>
     </Router>
-  </Provider>
+  </ApolloProvider>
   
   , document.getElementById('root'));
 registerServiceWorker();

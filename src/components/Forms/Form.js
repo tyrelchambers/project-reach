@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Form = (props) => (
-  <form className="form">
+  <form className="form" onSubmit={(e) => e.preventDefault()}>
     <div className="form-group">
       <input type="email" placeholder="Email" className="input"/>
     </div>
