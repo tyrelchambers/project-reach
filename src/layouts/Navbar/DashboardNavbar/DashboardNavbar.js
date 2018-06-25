@@ -7,19 +7,19 @@ export default class DashboardNavbar extends Component {
     return (
       <nav className="subnav row jc-c">
         <Link to="#overview" className="subnav__item column ai-c">
-          <i class="fas fa-tachometer-alt"></i>
+          <i className="fas fa-tachometer-alt"></i>
           Overview
         </Link>
         <Link to="#projects" className="subnav__item column ai-c">
-          <i class="fas fa-folder"></i>
+          <i className="fas fa-folder"></i>
           Projects
         </Link>
         <Link to="#social" className="subnav__item column ai-c">
-          <i class="fas fa-users"></i>
+          <i className="fas fa-users"></i>
           Social
         </Link>
         <Link to="#account" className="subnav__item column ai-c">
-          <i class="fas fa-users-cog"></i>
+          <i className="fas fa-users-cog"></i>
           Account
         </Link>
 
