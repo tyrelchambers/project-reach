@@ -28,7 +28,11 @@ class SignupPage extends Component {
         email,
         password
       }
-    });
+    })
+    .then(res => {
+      this.props.AuthStore.setEmail(res.data.createUser.email);
+    })
+    .catch(rej => console.log(rej));
   }
 
   render() {
