@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "apollo-boost": "^0.1.7",
+    "apollo-link": "^1.2.2",
     "autoprefixer": "7.1.6",
     "babel-core": "6.26.0",
     "babel-eslint": "7.2.3",
@@ -93,11 +94,18 @@
     ]
   },
   "babel": {
+    "plugins": [
+      "transform-decorators-legacy",
+      "transform-class-properties"
+    ],
     "presets": [
       "react-app"
     ]
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-decorators-legacy": "^1.3.5"
   }
 }
