@@ -7,9 +7,7 @@ import Form from '../../components/Forms/SignupForm';
 
 const CREATE_USER = gql`
   mutation createUser($email: String, $password: String) {
-    createUser(email: $email, password: $password) {
-      email
-    }
+    createUser(email: $email, password: $password)
   }
 `;
 
@@ -30,11 +28,12 @@ class SignupPage extends Component {
       }
     })
     .then(res => {
-      this.props.AuthStore.setEmail(res.data.createUser.email);
+      this.props.AuthStore.setEmail(this.state.email);
+      this.props.AuthStore.setCookie(res.data.createUser)
     })
     .catch(rej => console.log(rej));
   }
-
+  
   render() {
     return(
       <div className="container center column ai-c">
@@ -59,4 +58,4 @@ class SignupPage extends Component {
   }
 }
 
-export default graphql(CREATE_USER, { name: 'createUserMutation'})(SignupPage)
+export default graphql(CREATE_USER, { name: 'createUserMutation'})(SignupPage);
