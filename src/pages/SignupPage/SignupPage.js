@@ -38,7 +38,8 @@ class SignupPage extends Component {
     })
     .then(res => {
       this.props.AuthStore.setEmail(this.state.email);
-      this.props.AuthStore.setCookie(res.data.createUser)
+      this.props.AuthStore.setCookie(res.data.createUser);
+      // window.location.pathname = "/";
     })
     .catch(rej => console.log(rej));
   }
@@ -58,7 +59,6 @@ class SignupPage extends Component {
             await this.setState({errors});
             this.validation();
           };       
-          console.log(errors);
           this._createUser();       
         }}
         

@@ -13,9 +13,7 @@ class AuthStore {
     this.password = password;
   }
 
-  @action logout() {
-    this.email = "";
-  }
+  renderRedirect = (route) => window.location = route;
 
   setCookie = (token) => {
     this.token = token;
