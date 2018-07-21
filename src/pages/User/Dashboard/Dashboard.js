@@ -7,23 +7,24 @@ import Social from './Social/Social';
 
 export default class Dashboard extends Component {
   render() {
+  
     return (
       <React.Fragment>
         <DashboardNavbar />
         <div className="container center">
-          {this.props.location.hash === "#account" && 
+          {this.props.location.search === "?panel=account" && 
             <Account/>
           }
 
-          {this.props.location.hash === "#projects" && 
+          {this.props.location.search === "?panel=projects" && 
             <Projects/>
           }
 
-          {this.props.location.hash === "#overview" && 
+          {this.props.location.search === "?panel=overview" && 
             <Overview/>
           }
 
-          {this.props.location.hash === "#social" && 
+          {this.props.location.search === "?panel=social" && 
             <Social/>
           }
         </div>

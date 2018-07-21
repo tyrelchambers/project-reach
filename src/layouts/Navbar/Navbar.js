@@ -21,7 +21,6 @@ export default class Navbar extends Component {
             <NavLink to="/signin" activeClassName="active-link">Sign In</NavLink>
           </React.Fragment>
         )}
-        {console.log(this.props.AuthStore.email)}
       </nav>
     );
   }
