@@ -39,7 +39,7 @@ class SignupPage extends Component {
     .then(res => {
       this.props.AuthStore.setEmail(this.state.email);
       this.props.AuthStore.setCookie(res.data.createUser);
-      // window.location.pathname = "/";
+      window.location.pathname = "/";
     })
     .catch(rej => console.log(rej));
   }
