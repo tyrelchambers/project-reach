@@ -20,9 +20,23 @@ const httpLink = new HttpLink({
   uri: 'http://localhost:3001/graphql'
 });
 
+let defaults = {
+  email: "",
+  password: "",
+  token: ""
+}
+
+const resolvers = {
+
+}
+
 const client = new ApolloClient({
   link: httpLink,
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
+  clientState: {
+    defaults,
+    resolvers
+  }
 });
 
 const stores = {
