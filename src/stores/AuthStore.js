@@ -1,7 +1,17 @@
-import { observable, action } from 'mobx';
+import { observable, action, reaction } from 'mobx';
 
 class AuthStore {
-  @observable email = "";
+  constructor() {
+    reaction(
+      () => this.email,
+      email => window.localStorage.setItem("email", email),
+      {
+        fireImmediately: true
+      }
+    );
+  }
+
+  @observable email = "" || window.localStorage.getItem("email");
   @observable password = "";
   @observable token = "";
 
