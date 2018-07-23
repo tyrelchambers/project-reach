@@ -28,7 +28,7 @@ class SignupPage extends Component {
     });
   }
 
-  _createUser =  () => {
+  _createUser = () => {
     const { email, password } = this.state;
     this.props.createUserMutation({
       variables: {
