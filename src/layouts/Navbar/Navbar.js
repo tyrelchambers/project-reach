@@ -12,7 +12,7 @@ export default class Navbar extends Component {
         <NavLink to="/" activeClassName="active-link">Home</NavLink>
         {window.localStorage.getItem("jwt") ? (
           <React.Fragment>
-            <NavLink to="/dashboard#overview" activeClassName="active-link">{this.props.AuthStore.email}</NavLink>
+            <NavLink to="/dashboard?panel=overview" activeClassName="active-link">{this.props.AuthStore.email}</NavLink>
             <NavLink to="#" onClick={this.props.AuthStore.logoutUser}>Logout</NavLink>
           </React.Fragment>
         ) : (
