@@ -1,0 +1,36 @@
+@import '../../colours.scss';
+
+.modal__wrapper {
+  display: flex;
+  width:100%;
+  
+  background-color: rgba($primary, 0.4);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  z-index: 99;
+}
+
+.modal__content {
+  width: 100%;
+  max-width: 600px;
+  background-color: $white;
+  border-radius: 10px;
+  padding: 1.5em;
+  box-shadow: 0px 1px 3px 1px rgba(black, 0.3);
+}
+.modal__header {
+  display: flex;
+  justify-content: space-between;
+
+  h3 {
+    margin-top: 0;
+  }
+  span {
+    font-weight: 700;
+  }
+}

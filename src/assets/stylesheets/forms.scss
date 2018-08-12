@@ -18,3 +18,17 @@
 .form-group {
   margin: 0.5em 0;
 }
+
+.form-group {
+  display:flex;
+  flex-direction: column;
+  margin-top: 1em;
+}
+
+textarea {
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.7rem;
+  padding: 0.5em;
+  border: 1.5px solid $hr;
+
+}

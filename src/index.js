@@ -39,14 +39,14 @@ const client = new ApolloClient({
   }
 });
 
-const stores = {
+const store = {
   AuthStore,
   ProjectStore
 };
 
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <Provider {...stores}>
+    <Provider {...store}>
       <Router basename="/">
         <React.Fragment>
           <Header/>
