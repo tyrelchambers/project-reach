@@ -39,6 +39,7 @@ class NewProjectForm extends Component {
         e.preventDefault();
         console.log(this.state.title, this.state.description);
         this._createProject();
+        this.props.ProjectStore.toggleProjectModal(false);
     }
 
     titleHandler = (e) => {
@@ -64,7 +65,7 @@ class NewProjectForm extends Component {
                     <input type="text" placeholder="What is this project's goals and purpose?" className="input" onChange={this.descriptionHandler} name="description"/>
                 </div>
 
-                <button type="submit" className="btn btn-primary" onClick={this.props.ProjectStore.toggleProjectModal(false)}>Submit</button>
+                <button type="submit" className="btn btn-primary">Submit</button>
             </form>
         );
     }

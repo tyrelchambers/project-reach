@@ -5,8 +5,8 @@ class ProjectStore {
     @observable description = "";
     @observable modalOpen = false;
 
-    @action toggleProjectModal = () => {
-        this.modalOpen = !this.modalOpen;
+    @action toggleProjectModal = (isOpen = false) => {
+        this.modalOpen = isOpen;
     }
 }
 

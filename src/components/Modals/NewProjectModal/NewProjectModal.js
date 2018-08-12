@@ -12,7 +12,7 @@ export default class NewProjectModal extends Component {
         <div className="modal__content">
           <header className="modal__header">
             <h3>Create a new project</h3>
-            <span onClick={this.props.ProjectStore.toggleProjectModal}>X</span>
+            <span onClick={() => this.props.ProjectStore.toggleProjectModal(false)}>X</span>
           </header>
 
           <NewProjectForm/>

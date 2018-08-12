@@ -19,7 +19,11 @@ const ALL_PROJECTS = gql`
 export default class DashboardProjectList extends Component {
   render() {
     return(
-      <Query query={ALL_PROJECTS} variables={{creator: this.props.AuthStore.getCookie()}}>
+      <Query 
+        query={ALL_PROJECTS} 
+        variables={{creator: this.props.AuthStore.getCookie()}}
+        pollInterval={500}
+      >
       {({loading, error, data}) => {
         if (loading) return "Loading...";
         if (error) return error;
