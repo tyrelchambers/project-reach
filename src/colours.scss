@@ -16,3 +16,11 @@ $white: rgb(99.9%, 99.9%, 99.9%);
 .light-grey {
   color: lighten($primary, 15%);
 }
+
+.success {
+  color: $secondary;
+}
+
+.danger {
+  color: $icon-primary;
+}

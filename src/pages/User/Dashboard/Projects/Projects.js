@@ -9,13 +9,19 @@ import { inject, observer } from 'mobx-react';
 export default class Projects extends Component {
   render() {
     return (
-      <div>
-        <h1>Projects</h1>
-        <button onClick={() => this.props.ProjectStore.toggleProjectModal(true)}>Create a new project</button>
+      <div className="dashboard__panel">
+        <h1 className="dashboard__title">Projects</h1>
+        <button 
+          className="btn btn-primary" 
+          onClick={() => this.props.ProjectStore.toggleProjectModal(true)}>
+          
+          <i className="fas fa-plus"></i>
+          Create a new project
+        </button>
+
         {this.props.ProjectStore.modalOpen &&
           <NewProjectModal />
         }
-        <h3>Your Projects</h3>
         <DashboardProjectList />
       </div>
     )

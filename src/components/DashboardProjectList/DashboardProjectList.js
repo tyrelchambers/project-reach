@@ -29,13 +29,22 @@ export default class DashboardProjectList extends Component {
         if (error) return error;
 
         return (
-          <React.Fragment>
+          <div className="dashboard__project--list">
             {data.projects.map((x, id) => (
-              <div key={id}>
-                <h3>{x.title}</h3>
+              <div key={id} className="project">
+                <div className="project__info">
+                  <h3 className="project__title">{x.title}</h3>
+                  <p className="project__description subtitle">{x.description}</p>
+                </div>
+                <div className="project__actions">
+                  <span>
+                    <i className="fas fa-pencil-alt success"></i>
+                  </span>
+                  <i className="far fa-trash-alt danger"></i>
+                </div>
               </div>
             ))}
-          </React.Fragment>
+          </div>
         );
       }}
     </Query>
