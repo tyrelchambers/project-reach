@@ -13,8 +13,7 @@ const DELETE_PROJECT = gql`
 @observer
 class DeleteProject extends Component {
   
-  deleteProjectHandler = (props) => {
-    console.log('dat function');
+  deleteProjectHandler = () => {
     this.props.deleteProjectMutation({
       variables: {
         creator: this.props.AuthStore.getCookie(),

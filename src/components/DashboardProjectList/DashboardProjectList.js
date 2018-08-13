@@ -3,6 +3,7 @@ import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import { inject, observer } from 'mobx-react';
 import DeleteProject from '../DashboardProjectList/DashboardProjectActions/DeleteProject';
+import UpdateProject from '../DashboardProjectList/DashboardProjectActions/UpdateProject';
 
 const ALL_PROJECTS = gql`
   query projects($creator: String) {
@@ -38,7 +39,7 @@ export default class DashboardProjectList extends Component {
                 </div>
                 <div className="project__actions">
                   <span>
-                    <i className="fas fa-pencil-alt success"></i>
+                    <UpdateProject id={x._id} title={x.title} description={x.description}/>
                   </span>
                   <DeleteProject id={x._id}/>
                 </div>
