@@ -3,6 +3,7 @@ $primary: #1f1f1f;
 $light-grey: rgb(243, 243, 243);
 $secondary: #2ECC71;
 $icon-primary:  #F03434;
+$white: rgb(99.9%, 99.9%, 99.9%);
 
 .secondary {
   color: $secondary;
@@ -14,4 +15,12 @@ $icon-primary:  #F03434;
 
 .light-grey {
   color: lighten($primary, 15%);
+}
+
+.success {
+  color: $secondary;
+}
+
+.danger {
+  color: $icon-primary;
 }
