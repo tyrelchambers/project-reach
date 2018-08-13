@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-import { Query} from 'react-apollo';
+import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import { inject, observer } from 'mobx-react';
+import DeleteProject from '../DashboardProjectList/DashboardProjectActions/DeleteProject';
 
 const ALL_PROJECTS = gql`
-  
   query projects($creator: String) {
     projects(creator: $creator) {
       title,
-      description
+      description,
+      _id
     }
   }
-  
 `;
 
 @inject("AuthStore")
@@ -40,7 +40,7 @@ export default class DashboardProjectList extends Component {
                   <span>
                     <i className="fas fa-pencil-alt success"></i>
                   </span>
-                  <i className="far fa-trash-alt danger"></i>
+                  <DeleteProject id={x._id}/>
                 </div>
               </div>
             ))}
