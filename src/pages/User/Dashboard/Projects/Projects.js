@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import DashboardProjectList from '../../../../components/DashboardProjectList/DashboardProjectList';
 import './Projects.scss';
 import NewProjectModal from '../../../../components/Modals/NewProjectModal/NewProjectModal';
+import UpdateProjectModal from '../../../../components/Modals/UpdateProjectModal/UpdateProjectModal';
 import { inject, observer } from 'mobx-react';
 
 @inject('AuthStore', "ProjectStore")
@@ -22,6 +23,10 @@ export default class Projects extends Component {
         {this.props.ProjectStore.modalOpen &&
           <NewProjectModal />
         }
+        {this.props.ProjectStore.updateModalOpen &&
+          <UpdateProjectModal />
+        }
+        
         <DashboardProjectList />
       </div>
     )
