@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import { inject, observer } from 'mobx-react';
-import DeleteProject from '../DashboardProjectList/DashboardProjectActions/DeleteProject';
-import UpdateProject from '../DashboardProjectList/DashboardProjectActions/UpdateProject';
+import DeleteProject from './DashboardProjectActions/DeleteProject';
+import UpdateProject from './DashboardProjectActions/UpdateProject';
 
 const ALL_PROJECTS = gql`
   query projects($creator: String) {
@@ -15,7 +15,7 @@ const ALL_PROJECTS = gql`
   }
 `;
 
-@inject("AuthStore")
+@inject("AuthStore", "ProjectStore")
 @observer
 export default class DashboardProjectList extends Component {
   render() {
@@ -39,11 +39,14 @@ export default class DashboardProjectList extends Component {
                 </div>
                 <div className="project__actions">
                   <span>
-                    <UpdateProject id={x._id} title={x.title} description={x.description}/>
+                    <UpdateProject title={x.title} description={x.description} id={x._id}/>
+                    
                   </span>
                   <DeleteProject id={x._id}/>
                 </div>
+                
               </div>
+              
             ))}
           </div>
         );

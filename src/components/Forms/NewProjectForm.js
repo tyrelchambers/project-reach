@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import gql from 'graphql-tag';
-import { observer, inject } from '../../../node_modules/mobx-react';
+import { observer, inject } from 'mobx-react';
 import { graphql } from 'react-apollo';
 
 const CREATE_PROJECT = gql`
