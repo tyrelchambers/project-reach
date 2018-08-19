@@ -4,8 +4,8 @@ import { observer, inject } from 'mobx-react';
 import { graphql } from 'react-apollo';
 
 const CREATE_PROJECT = gql`
-    mutation createProject($title: String, $description: String, $creator: String) {
-        createProject(title: $title, description: $description, creator: $creator)
+    mutation createProject($title: String, $description: String, $creator: String, $headline: String) {
+        createProject(title: $title, description: $description, creator: $creator, headline: $headline)
     }
 `;
 
@@ -17,18 +17,20 @@ class NewProjectForm extends Component {
         this.state = {
             title: "",
             description: "",
+            headline: "",
             creator: this.props.AuthStore.email,
             token: this.props.AuthStore.getCookie()
         }
     }
 
     _createProject = () => {
-        const { title, description, creator } = this.state;
+        const { title, description, creator, headline } = this.state;
         this.props.createProjectMutation({
             variables: {
                 title,
                 description,
-                creator
+                creator,
+                headline
             }
         })
         .then(res => console.log(res))
@@ -52,6 +54,11 @@ class NewProjectForm extends Component {
         this.setState({description: value});
     }
 
+    headlineHandler = (e) => {
+        const value = e.target.value;
+        this.setState({headline: value});
+    }
+
     render() {
         return (
             <form className="form" onSubmit={this.submitForm}>
@@ -61,8 +68,13 @@ class NewProjectForm extends Component {
                 </div>
 
                 <div className="form-group">
+                    <label htmlFor="">Headline</label>
+                    <input type="text" placeholder="In 255 characters or less, describe your project" className="input" onChange={this.headlineHandler} name="headline"/>
+                </div>
+
+                <div className="form-group">
                     <label htmlFor="">Description</label>
-                    <input type="text" placeholder="What is this project's goals and purpose?" className="input" onChange={this.descriptionHandler} name="description"/>
+                    <textarea type="text" placeholder="What is this project's goals and purpose?" className="input" onChange={this.descriptionHandler} name="description"/>
                 </div>
 
                 <button type="submit" className="btn btn-primary">Submit</button>

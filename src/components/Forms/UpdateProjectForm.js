@@ -4,8 +4,8 @@ import {graphql} from 'react-apollo';
 import gql from 'graphql-tag';
 
 const UPDATE_PROJECT = gql`
-  mutation updateProject($creator: String, $project_id: String, $title: String, $description: String) {
-    updateProject(creator: $creator, project_id: $project_id, title: $title, description: $description)
+  mutation updateProject($creator: String,, $title: String, $description: String) {
+    updateProject(creator: $creator, title: $title, description: $description)
   }
 `;
 @inject('AuthStore', "ProjectStore")
@@ -56,6 +56,10 @@ descriptionHandler = (e) => {
         <div className="form-group">
             <label htmlFor="">Title</label>
             <input type="text" placeholder="Project Name" className="input" onChange={this.titleHandler} name="title" value={this.state.title ? this.state.title : ""}/>
+        </div>
+        <div className="form-group">
+            <label htmlFor="">Headline</label>
+            <input type="text" placeholder="In 255 characters or less, describe your project" className="input" onChange={this.headlineHandler} name="headline" value={this.state.headline ? this.state.headline : ""}/>
         </div>
         <div className="form-group">
             <label htmlFor="">Description</label>
