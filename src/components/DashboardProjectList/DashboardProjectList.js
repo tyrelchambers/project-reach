@@ -10,6 +10,7 @@ const ALL_PROJECTS = gql`
     projects(creator: $creator) {
       title,
       description,
+      headline,
       _id
     }
   }
@@ -18,6 +19,14 @@ const ALL_PROJECTS = gql`
 @inject("AuthStore", "ProjectStore")
 @observer
 export default class DashboardProjectList extends Component {
+  constructor() {
+    super();
+    this.state = {
+      projectModalOpen: false
+    }
+  }
+
+
   render() {
     return(
       <Query 
@@ -32,21 +41,20 @@ export default class DashboardProjectList extends Component {
         return (
           <div className="dashboard__project--list">
             {data.projects.map((x, id) => (
-              <div key={id} className="project">
-                <div className="project__info">
-                  <h3 className="project__title">{x.title}</h3>
-                  <p className="project__description subtitle">{x.description}</p>
-                </div>
+              <div className="project" key={id}>
+                <a href={`/project/${x._id}`} className=" no-decoration" key={id} onClick={this.modalHandler}>
+                  <div className="project__info">
+                    <h3 className="project__title">{x.title}</h3>
+                    <p className="project__description subtitle">{x.headline}</p>
+                  </div>
+                </a>
                 <div className="project__actions">
                   <span>
-                    <UpdateProject title={x.title} description={x.description} id={x._id}/>
-                    
+                    <UpdateProject title={x.title} description={x.description} headline={x.headline} id={x._id}/> 
                   </span>
                   <DeleteProject id={x._id}/>
-                </div>
-                
-              </div>
-              
+                </div>   
+              </div>                            
             ))}
           </div>
         );

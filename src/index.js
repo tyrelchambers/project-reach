@@ -10,7 +10,7 @@ import SignupPage from './pages/SignupPage/SignupPage';
 import IndexPage from './pages/IndexPages/IndexPage';
 import Header from './layouts/Header/Header';
 import Dashboard from './pages/User/Dashboard/Dashboard';
-
+import ProjectIndexPage from './pages/ProjectIndexPage/ProjectIndexPage';
 import AuthStore from './stores/AuthStore';
 import ProjectStore from './stores/ProjectStore';
 
@@ -20,23 +20,9 @@ const httpLink = new HttpLink({
   uri: 'http://localhost:3001/graphql'
 });
 
-let defaults = {
-  email: "",
-  password: "",
-  token: ""
-}
-
-const resolvers = {
-
-}
-
 const client = new ApolloClient({
   link: httpLink,
-  cache: new InMemoryCache(),
-  clientState: {
-    defaults,
-    resolvers
-  }
+  cache: new InMemoryCache()
 });
 
 const store = {
@@ -53,6 +39,7 @@ ReactDOM.render(
           <Route exact path="/" component={IndexPage}/>
           <Route exact path="/signup" component={SignupPage}/>
           <Route exact path="/dashboard" component={Dashboard} />
+          <Route exact path="/project/:project_slug" component={ProjectIndexPage} />
         </React.Fragment>
       </Router>
     </Provider>

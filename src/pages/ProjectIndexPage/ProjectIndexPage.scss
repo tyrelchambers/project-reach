@@ -27,10 +27,9 @@
   left: 50%;
   transform: translateX(-50%);
 }
-.modal__header {
-  display: flex;
-  justify-content: space-between;
+.header.small {
 
+  background-color: transparent;
   h3 {
     margin-top: 0;
   }
@@ -44,7 +43,7 @@
 }
 
 .modal__image--hero {
-  width: 600px;
+  width: 100%;
   height: 400px;
   background-color: rebeccapurple;
 }
@@ -56,7 +55,7 @@
 
 .about__creator {
   width: 300px;
-  background-color: rgb(247, 247, 247);
+  background-color: $white;
   padding: 1em;
   border: 1px solid hsl(0, 0%, 84.3%);
 }
@@ -71,4 +70,40 @@
   padding: 0.5em;
   border: 1px solid rgba(black, 0.1);
   background-color: $white;
+}
+
+.feedback-action {
+  display: flex;
+  align-items: center;
+  width: 75px;
+  border-radius: 10px;
+  
+  > i {
+    margin-right: 10px;
+  }
+}
+
+.like-action, 
+.dislike-action {
+  color: darken($light-grey, 30%);
+
+  p {
+    color: inherit;
+  }
+}
+
+.like-action:hover {
+  color: $secondary;
+
+  p {
+    color: inherit;
+  }
+}
+
+.dislike-action:hover {
+  color: $icon-primary;
+
+  p {
+    color: inherit;
+  }
 }

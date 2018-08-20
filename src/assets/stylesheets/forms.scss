@@ -5,6 +5,10 @@
   max-width: 400px;
 }
 
+.form.wide {
+  max-width: 100% !important;
+}
+
 .input {
   width: 100%;
   border: 1.5px solid $hr;
@@ -30,5 +34,11 @@ textarea {
   font-size: 0.7rem;
   padding: 0.5em;
   border: 1.5px solid $hr;
+  resize: vertical;
+}
 
+.styled-block-form {
+  background-color: $white;
+  padding: 0.5em;
+  border: 1px solid $hr;
 }
