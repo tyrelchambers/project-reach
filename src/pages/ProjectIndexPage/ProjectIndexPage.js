@@ -3,12 +3,17 @@ import './ProjectIndexPage.scss';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import ProjectCommentForm from '../../components/Forms/ProjectCommentForm';
+import ProjectComment from '../../components/ProjectComment/ProjectComment';
 
 const FIND_PROJECT = gql`
   query projectById($project_id:String) {
     projectById(project_id: $project_id) {
       title,
-      description
+      description,
+      headline,
+      comments {
+        comment
+      }
     }
   }
 `;
@@ -29,7 +34,7 @@ class ProjectIndexPage extends Component {
             <div className="container small center">
               <header className="column">
                 <h1 className="title">{data.projectById.title}</h1>
-                <p className="description">{data.projectById.description}</p>
+                <p className="headline subtitle">{data.projectById.headline}</p>
               </header>
               <hr className="hr"/>
               <div className="row jc-sb">
@@ -52,11 +57,11 @@ class ProjectIndexPage extends Component {
                       <h3 className="uppercase font small ">Feedback</h3>
                       <div className="row">
                         <span className="feedback-action row bold like-action">
-                          <i class="fas fa-thumbs-up"></i>
+                          <i className="fas fa-thumbs-up"></i>
                           <p className="uppercase font small">Like</p>
                         </span>
                         <span className="feedback-action row bold dislike-action">
-                          <i class="fas fa-thumbs-down"></i>
+                          <i className="fas fa-thumbs-down"></i>
                           <p className="uppercase font small">Dislike</p>
                         </span>
                       </div>
@@ -66,7 +71,12 @@ class ProjectIndexPage extends Component {
                           <h3 className="uppercase font small">Comments</h3>
                           <p>12</p>
                         </div>
-                        <ProjectCommentForm/>
+                        <ProjectCommentForm project_id={slug}/>
+                        {data.projectById.comments.map((x, id) => {
+                          return(
+                            <ProjectComment comment={x.comment} key={id} />
+                          )
+                        })}
                       </div>
                     </div>
                   </div>

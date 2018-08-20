@@ -32,14 +32,11 @@ class NewProjectForm extends Component {
                 creator,
                 headline
             }
-        })
-        .then(res => console.log(res))
-        .catch(err => console.log("Error!" + err));
+        });
     }
 
     submitForm = (e) => {
         e.preventDefault();
-        console.log(this.state.title, this.state.description);
         this._createProject();
         this.props.ProjectStore.toggleProjectModal(false);
     }
