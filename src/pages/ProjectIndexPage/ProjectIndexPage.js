@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import ProjectCommentForm from '../../components/Forms/ProjectCommentForm';
 import ProjectComment from '../../components/ProjectComment/ProjectComment';
+import { observer, inject } from 'mobx-react';
 
 const FIND_PROJECT = gql`
   query projectById($project_id:String) {
@@ -17,7 +18,8 @@ const FIND_PROJECT = gql`
     }
   }
 `;
-
+@inject('AuthStore')
+@observer
 class ProjectIndexPage extends Component {
   render() {
     const slug = this.props.match.params.project_slug;
@@ -74,7 +76,7 @@ class ProjectIndexPage extends Component {
                         <ProjectCommentForm project_id={slug}/>
                         {data.projectById.comments.map((x, id) => {
                           return(
-                            <ProjectComment comment={x.comment} key={id} />
+                            <ProjectComment comment={x.comment} creator={window.localStorage.getItem("email")} key={id} />
                           )
                         })}
                       </div>

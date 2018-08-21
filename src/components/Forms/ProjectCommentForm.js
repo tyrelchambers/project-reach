@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
+import { observer, inject} from 'mobx-react';
 
 const POST_COMMENT = gql`
-  mutation postComment($comment: String, $project_id: String) {
-    postComment(comment: $comment, project_id: $project_id)
+  mutation postComment($comment: String, $project_id: String, $creator: String) {
+    postComment(comment: $comment, project_id: $project_id, creator: $creator)
   }
 `;
+
+@inject('AuthStore')
+@observer
 class ProjectCommentForm extends Component {
   constructor() {
     super();
@@ -20,7 +24,8 @@ class ProjectCommentForm extends Component {
     this.props.postCommentMutation({
       variables: {
         comment,
-        project_id
+        project_id,
+        creator: this.props.AuthStore.getCookie()
       }
     });
   }

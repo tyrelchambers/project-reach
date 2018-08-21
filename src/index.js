@@ -13,6 +13,7 @@ import Dashboard from './pages/User/Dashboard/Dashboard';
 import ProjectIndexPage from './pages/ProjectIndexPage/ProjectIndexPage';
 import AuthStore from './stores/AuthStore';
 import ProjectStore from './stores/ProjectStore';
+import LoginPage from './pages/Loginpage/LoginPage';
 
 import registerServiceWorker from './registerServiceWorker';
 
@@ -38,6 +39,7 @@ ReactDOM.render(
           <Header/>
           <Route exact path="/" component={IndexPage}/>
           <Route exact path="/signup" component={SignupPage}/>
+          <Route exact path="/signin" component={LoginPage}/>
           <Route exact path="/dashboard" component={Dashboard} />
           <Route exact path="/project/:project_slug" component={ProjectIndexPage} />
         </React.Fragment>
