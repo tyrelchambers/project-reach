@@ -5,6 +5,7 @@ import { Query } from 'react-apollo';
 import ProjectCommentForm from '../../components/Forms/ProjectCommentForm';
 import ProjectComment from '../../components/ProjectComment/ProjectComment';
 import { observer, inject } from 'mobx-react';
+import moment from 'moment';
 
 const FIND_PROJECT = gql`
   query projectById($project_id:String) {
@@ -13,8 +14,11 @@ const FIND_PROJECT = gql`
       description,
       headline,
       comments {
-        comment
-      }
+        comment,
+        creator,
+        created_at
+      },
+      created_at
     }
   }
 `;
@@ -31,7 +35,7 @@ class ProjectIndexPage extends Component {
         {({loading, error, data}) => {
           if (loading) return "Loading...";
           if (error) return error;
-          console.log(data);
+          const created_at = data.projectById.created_at;
           return (
             <div className="container small center">
               <header className="column">
@@ -45,14 +49,15 @@ class ProjectIndexPage extends Component {
                   
                   </div>
                   <div>
-                    <div className="row uppercase font small">
-                      <p>Created: August 16th, 2018</p>
-                    </div>
-                    <div className="box">
+                    
+                    <div className="box description">
                       <h3 className="uppercase font small">About the project</h3>
-                      <p>Lorem ipsum dolor amet flexitarian man bun sriracha pok pok cloud bread. Single-origin coffee leggings chartreuse woke cray meh. Humblebrag narwhal poutine health goth sriracha YOLO. Tattooed literally kinfolk, YOLO PBR&B drinking vinegar etsy. Occupy fashion axe hot chicken 3 wolf moon edison bulb craft beer. Distillery cred bicycle rights, bitters copper mug hexagon YOLO affogato.</p>
-                      <p>Lorem ipsum dolor amet flexitarian man bun sriracha pok pok cloud bread. Single-origin coffee leggings chartreuse woke cray meh. Humblebrag narwhal poutine health goth sriracha YOLO. Tattooed literally kinfolk, YOLO PBR&B drinking vinegar etsy. Occupy fashion axe hot chicken 3 wolf moon edison bulb craft beer. Distillery cred bicycle rights, bitters copper mug hexagon YOLO affogato.</p>
-                      <p>Lorem ipsum dolor amet flexitarian man bun sriracha pok pok cloud bread. Single-origin coffee leggings chartreuse woke cray meh. Humblebrag narwhal poutine health goth sriracha YOLO. Tattooed literally kinfolk, YOLO PBR&B drinking vinegar etsy. Occupy fashion axe hot chicken 3 wolf moon edison bulb craft beer. Distillery cred bicycle rights, bitters copper mug hexagon YOLO affogato.</p>
+                      <pre>
+                        {data.projectById.description}
+                      </pre>
+                    </div>
+                    <div className="row ">
+                      <p className="uppercase font small bold">Created: {created_at}</p>
                     </div>
                     <hr className="hr"/>
                     <div className="column">
@@ -71,12 +76,12 @@ class ProjectIndexPage extends Component {
                       <div className="column">
                         <div className="row jc-sb ai-c">
                           <h3 className="uppercase font small">Comments</h3>
-                          <p>12</p>
+                          <p>{data.projectById.comments.length}</p>
                         </div>
                         <ProjectCommentForm project_id={slug}/>
                         {data.projectById.comments.map((x, id) => {
                           return(
-                            <ProjectComment comment={x.comment} creator={window.localStorage.getItem("email")} key={id} />
+                            <ProjectComment comment={x.comment} creator={x.creator} key={id} />
                           )
                         })}
                       </div>

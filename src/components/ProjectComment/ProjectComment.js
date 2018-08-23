@@ -3,8 +3,8 @@ import './ProjectComment.scss';
 
 const ProjectComment = props => (
   <div className="project__comment">
-    <p>{props.comment}</p>
-    <p>{props.creator}</p>
+    <p className="comment__message">{props.comment}</p>
+    <p className="comment__creator">{props.creator}</p>
   </div>
 )
 
