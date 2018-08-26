@@ -6,6 +6,7 @@ import ProjectCommentForm from '../../components/Forms/ProjectCommentForm';
 import ProjectComment from '../../components/ProjectComment/ProjectComment';
 import { observer, inject } from 'mobx-react';
 import moment from 'moment';
+import LoadingSplash from '../../components/LoadingSplash/LoadingSplash';
 
 const FIND_PROJECT = gql`
   query projectById($project_id:String) {
@@ -33,7 +34,7 @@ class ProjectIndexPage extends Component {
         variables={{project_id: slug}}
       >
         {({loading, error, data}) => {
-          if (loading) return "Loading...";
+          if (loading) return <LoadingSplash/>;
           if (error) return error;
           const created_at = data.projectById.created_at;
           return (

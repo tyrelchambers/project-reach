@@ -4,8 +4,8 @@ import {graphql} from 'react-apollo';
 import gql from 'graphql-tag';
 
 const UPDATE_PROJECT = gql`
-  mutation updateProject($creator: String,, $title: String, $description: String) {
-    updateProject(creator: $creator, title: $title, description: $description)
+  mutation updateProject($creator: String, $title: String, $description: String, $headline: String) {
+    updateProject(creator: $creator, title: $title, description: $description, headline: $headline)
   }
 `;
 @inject('AuthStore', "ProjectStore")
@@ -17,22 +17,22 @@ class UpdateProjectForm extends Component {
         title: "" || this.props.ProjectStore.title,
         description: "" || this.props.ProjectStore.description,
         creator: this.props.AuthStore.getCookie(),
-        project_id: this.props.ProjectStore.project_id
+        project_id: this.props.ProjectStore.project_id,
+        headline: "" || this.props.ProjectStore.headline
     }
 }
 
 _updateProject = () => {
-    const { title, description, creator, project_id } = this.state;
+    const { title, description, creator, project_id, headline } = this.state;
     this.props.updateProjectMutation({
         variables: {
             title,
             description,
             creator,
-            project_id
+            project_id,
+            headline
         }
-    })
-    .then(res => console.log(res))
-    .catch(err => console.log("Error!" + err));
+    });
 }
 
 submitForm = (e) => {
@@ -49,6 +49,11 @@ titleHandler = (e) => {
 descriptionHandler = (e) => {
     const value = e.target.value;
     this.setState({description: value});
+}
+
+headlineHandler = e => {
+    const value = e.target.value;
+    this.setState({headline: value});
 }
   render() {
     return(
