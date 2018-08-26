@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 import { inject, observer } from 'mobx-react';
 import DeleteProject from './DashboardProjectActions/DeleteProject';
 import UpdateProject from './DashboardProjectActions/UpdateProject';
+import LoadingSplash from '../LoadingSplash/LoadingSplash';
 
 const ALL_PROJECTS = gql`
   query projects($creator: String) {
@@ -35,7 +36,7 @@ export default class DashboardProjectList extends Component {
         pollInterval={500}
       >
       {({loading, error, data}) => {
-        if (loading) return "Loading...";
+        if (loading) return <LoadingSplash/>;
         if (error) return error;
 
         return (

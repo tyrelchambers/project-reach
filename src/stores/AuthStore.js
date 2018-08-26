@@ -9,10 +9,18 @@ class AuthStore {
         fireImmediately: true
       }
     );
+    reaction(
+      () => this.username,
+      username => window.localStorage.setItem("username", username),
+      {
+        fireImmediately: true
+      }
+    );
   }
 
   @observable email = "" || window.localStorage.getItem("email");
   @observable password = "";
+  @observable username = "" || window.localStorage.getItem("username");
   @observable token = "";
 
   @action setEmail(email) {
@@ -21,6 +29,10 @@ class AuthStore {
 
   @action setPassword(password) {
     this.password = password;
+  }
+
+  @action setUsername(username) {
+    this.username = username;
   }
 
   renderRedirect = (route) => window.location = route;
@@ -32,6 +44,14 @@ class AuthStore {
 
   getCookie = () => {
     return window.localStorage.getItem('jwt');
+  }
+
+  getEmail = () => {
+    window.localStorage.getItem("email");
+  }
+
+  getUsername = () => {
+    window.localStorage.getItem("username");
   }
 
   logoutUser = () => {
