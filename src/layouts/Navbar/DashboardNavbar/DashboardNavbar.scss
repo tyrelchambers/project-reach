@@ -1,14 +1,14 @@
 @import '../../../colours.scss';
 
 .subnav {
-  background-color: $light-grey;
+  background-color: $purple;
   box-shadow: 0px 1px 3px rgba(black, 0.3);
 }
 
 .subnav__item {
   display: inline-flex;
   padding: 0.7em 1em;
-  color: $primary;
+  color: $white;
   border-bottom: 2px solid transparent;
   font-weight: 700;
   font-size: 0.9rem;
