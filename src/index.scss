@@ -131,4 +131,14 @@ hr {
 
 .container main {
   margin-right: 2em;
+  width: 100%;
+}
+
+pre {
+  width: 100%;
+  white-space: pre-wrap;
+  line-height: 1.8em;
+  font-family: 'Muli', sans-serif;
+  font-size: 0.8rem;
+  color: $primary;
 }

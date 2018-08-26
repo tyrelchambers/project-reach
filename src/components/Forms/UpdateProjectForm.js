@@ -63,7 +63,7 @@ descriptionHandler = (e) => {
         </div>
         <div className="form-group">
             <label htmlFor="">Description</label>
-            <input type="text" placeholder="What is this project's goals and purpose?" className="input" onChange={this.descriptionHandler} name="description" value={this.state.description ? this.state.description : ""}/>
+            <textarea type="text" placeholder="What is this project's goals and purpose?" className="input" onChange={this.descriptionHandler} name="description" value={this.state.description ? this.state.description : ""}/>
         </div>
 
         <button type="submit" className="btn btn-primary">Submit</button>
