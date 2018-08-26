@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './ProjectList.scss';
 import {Query} from 'react-apollo';
 import gql from 'graphql-tag';
+import LoadingSplash from '../LoadingSplash/LoadingSplash';
 
 const ALL_PROJECTS = gql`
   {
@@ -19,7 +20,7 @@ class ProjectList extends Component {
         query={ALL_PROJECTS}
       >
         {({loading, error, data}) => {
-          if (loading) return "Loading...";
+          if (loading) return <LoadingSplash/>;
           if (error) return error;
           return(
             <div className="project-list">

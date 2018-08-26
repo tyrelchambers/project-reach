@@ -1,7 +1,7 @@
 import React from 'react'
 
 const AccountForm = (props) => (
-  <form className="form" onSubmit={props.submitted}>
+  <form className="form wide" onSubmit={props.submitted}>
     <div className="form-group">
       <input type="username" placeholder="Username" className="input" onChange={props.usernameHandler} name="username"/>
     </div>
