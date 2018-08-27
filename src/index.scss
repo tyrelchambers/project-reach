@@ -40,7 +40,7 @@ aside {
 }
 
 hr {
-  height: 2px;
+  height: 1px;
   width: 100%;
   border: 0px solid white;
 }
@@ -127,7 +127,7 @@ hr {
 }
 
 .hr {
-  background-color: $hr;
+  background-color: lighten($primary, 70%);
 }
 
 .container main {
