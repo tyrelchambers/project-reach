@@ -5,6 +5,8 @@ export default class Social extends Component {
     return (
       <div>
         <h1>Social</h1>
+        <hr className="hr"/>
+
       </div>
     )
   }

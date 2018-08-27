@@ -5,6 +5,8 @@ export default class Overview extends Component {
     return (
       <div>
         <h1>Overview</h1>
+        <hr className="hr"/>
+
       </div>
     )
   }

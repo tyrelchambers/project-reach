@@ -4,6 +4,7 @@ import './Account.scss';
 import { observer, inject } from 'mobx-react';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
+import ConfirmPasswordModal from '../../../../components/Modals/ConfirmPasswordModal/ConfirmPasswordModal';
 
 const UPDATE_ACCOUNT = gql`
   mutation updateAccount($email: String, $password: String, $username: String, $creator: String) {
@@ -18,7 +19,8 @@ class Account extends Component {
     this.state = {
       email: '',
       password: "",
-      username: ""
+      username: "",
+      openModal: false
     }
   }
 
@@ -59,13 +61,22 @@ class Account extends Component {
     });
   }
 
+  // modalHandler = (e) => {
+  //   e.preventDefault();
+  //   this.setState({openModal: !this.state.openModal});
+  // }
   render() {
     return (
       <div className="dashboard__panel">
         <h1 className="dashboard__title">Account</h1>
+        <hr className="hr"/>
         <div className="row account__sub-panel">
           <main className="account__main">
-            <AccountForm usernameHandler={this.usernameHandler} submitted={this.submitted} emailHandler={this.emailHandler} passwordHandler={this.passwordHandler}/>
+            <AccountForm usernameHandler={this.usernameHandler} submitted={this.submitted} emailHandler={this.emailHandler} passwordHandler={this.passwordHandler} />
+
+            {/* {this.state.openModal && 
+              <ConfirmPasswordModal toggleModal={this.modalHandler}/>
+            } */}
           </main>
         </div>
       </div>

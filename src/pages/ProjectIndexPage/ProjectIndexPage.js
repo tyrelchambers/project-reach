@@ -43,7 +43,6 @@ class ProjectIndexPage extends Component {
                 <h1 className="title">{data.projectById.title}</h1>
                 <p className="headline subtitle">{data.projectById.headline}</p>
               </header>
-              <hr className="hr"/>
               <div className="row jc-sb">
                 <main>
                   <div className="modal__image--hero">
