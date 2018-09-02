@@ -57,7 +57,7 @@
   width: 300px;
   background-color: $white;
   padding: 1em;
-  border: 1px solid hsl(0, 0%, 84.3%);
+  border: 1px solid rgba($hr, 70%);
 }
 
 .about__creator--header {
@@ -110,4 +110,80 @@
 
 .description {
   margin: 1em 0;
+}
+
+.project-thumbnail {
+  height: 75px;
+  width: 75px;
+  background-color: rebeccapurple;
+  margin-right: 25px;
+}
+
+.project__header {
+  margin-bottom: 20px;
+}
+
+.thumbnail__list {
+  margin: 15px 0;
+}
+
+.thumbnail__item {
+  height: 70px;
+  width: 70px;
+  background-color: rebeccapurple;
+
+  &:not(:last-child) {
+    margin-right: 10px;
+  }
+}
+
+.logo.small {
+  width: 15px;
+  height: 15px;
+}
+
+.project__website-link {
+  padding: 0.3em 0.8em;
+  border: 1px solid rgba($hr, 70%);
+  background-color: $white;
+  margin: 20px 0;
+
+  p {
+    margin: 0;
+  }
+}
+
+.feedback {
+  padding: 0em 1em;
+  padding-bottom: 1em;
+  background-color: $white;
+  border-radius: 5px;
+  border:1px solid rgba($hr, 70%)
+}
+
+.social-vote__item {
+  border:1px solid rgba($hr, 70%);
+  padding: 0.4em 0.8em;
+  border-radius: 5px;
+  &:not(:last-child) {
+    margin-right: 15px;
+  }
+
+  .icon {
+    margin-right: 5px;
+  }
+
+  i {
+    color: darken($hr, 40%);
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
+.dash {
+  width: 20px;
+  height: 3px;
+  background-color: darken($hr, 40%);
 }

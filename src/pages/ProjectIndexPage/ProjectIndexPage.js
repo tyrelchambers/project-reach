@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './ProjectIndexPage.scss';
+import '../../assets/stylesheets/btn.scss';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import ProjectCommentForm from '../../components/Forms/ProjectCommentForm';
@@ -39,14 +40,26 @@ class ProjectIndexPage extends Component {
           const created_at = data.projectById.created_at;
           return (
             <div className="container small center">
-              <header className="column">
-                <h1 className="title">{data.projectById.title}</h1>
-                <p className="headline subtitle">{data.projectById.headline}</p>
+              <header className="row project__header jc-sb ai-c">
+                <div className="row">
+                  <div className="project-thumbnail"></div>
+                  <div className="column">
+                    <h2 className="title no-margin">{data.projectById.title}</h2>
+                    <p className="headline subtitle">{data.projectById.headline}</p>
+                  </div>
+                </div>
+                <i className="far fa-bell notification-bell"></i>
               </header>
               <div className="row jc-sb">
                 <main>
-                  <div className="modal__image--hero">
-                  
+                  <div className="column">
+                    <div className="modal__image--hero"></div>
+                    <div className="row thumbnail__list">
+                      <div className="thumbnail__item"></div>
+                      <div className="thumbnail__item"></div>
+                      <div className="thumbnail__item"></div>
+                      <div className="thumbnail__item"></div>
+                    </div>
                   </div>
                   <div>
                     
@@ -61,22 +74,31 @@ class ProjectIndexPage extends Component {
                     </div>
                     <hr className="hr"/>
                     <div className="column">
-                      <h3 className="uppercase font small ">Feedback</h3>
-                      <div className="row">
-                        <span className="feedback-action row bold like-action">
-                          <i className="fas fa-thumbs-up"></i>
-                          <p className="uppercase font small">Like</p>
-                        </span>
-                        <span className="feedback-action row bold dislike-action">
-                          <i className="fas fa-thumbs-down"></i>
-                          <p className="uppercase font small">Dislike</p>
-                        </span>
-                      </div>
-                      <hr className="hr"/>
                       <div className="column">
                         <div className="row jc-sb ai-c">
-                          <h3 className="uppercase font small">Comments</h3>
-                          <p>{data.projectById.comments.length}</p>
+                        <h3 className="uppercase font small ">Feedback</h3>
+                        </div>
+                        <div className="feedback">
+                          <div className="row jc-sb ai-c">
+                            <h4 className="bold">Project interest</h4>
+                            <p>{data.projectById.comments.length} reviews</p>
+                          </div>
+                          <div className="row">
+                            <div className="row social-vote__list">
+                              <div className="social-vote__item ai-c jc-c row">
+                                <i className="far fa-thumbs-up icon"></i>
+                                <p>42</p>
+                              </div>
+                              <div className="social-vote__item ai-c jc-c row">
+                                <div className="dash icon"></div>
+                                <p>10</p>
+                              </div>
+                              <div className="social-vote__item ai-c jc-c row">
+                                <i class="far fa-thumbs-down icon"></i>
+                                <p>3</p>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                         <ProjectCommentForm project_id={slug}/>
                         {data.projectById.comments.map((x, id) => {
@@ -89,15 +111,22 @@ class ProjectIndexPage extends Component {
                   </div>
                 </main>
                 <aside>
-                <h3 className="uppercase font small">About the creator</h3>
+                  <div className="project__upvote ">
+                    <p className="bold uppercase btn btn-primary no-margin">upvote 1,600</p>
+                  </div>
+                  <div className="row project__website-link jc-sb ai-c">
+                    <div className="column">
+                      <p className="bold">Website</p>
+                      <p>www.project.com</p>
+                    </div>
+                    <img src={require('../../assets/002-scale-symbol.png')} className="logo small" alt="External Link Button"/>
+                  </div>
                   <div className="about__creator">
-                    <span className="about__creator--header">
-                      <h4>Tyrel Chambers</h4>
-                      <p className="subtitle">Joined 2 years ago</p>
-                    </span>  
+                    <h4 className="no-margin">Tyrel Chambers</h4>  
                     <p>
                       A little lorem ipsum. A little lorem ipsum. A little lorem ipsum. A little lorem ipsum. A little lorem ipsum. A little lorem ipsum. A little lorem ipsum. A little lorem ipsum.
-                    </p>              
+                    </p>       
+                    <p className="subtitle">Joined 2 years ago</p>       
                   </div>
                   <hr className="hr"/>
                   <div className="column">
