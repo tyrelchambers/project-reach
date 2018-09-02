@@ -162,6 +162,8 @@
 }
 
 .social-vote__item {
+  display: flex;
+  align-self: center;
   border:1px solid rgba($hr, 70%);
   padding: 0.4em 0.8em;
   border-radius: 5px;
@@ -186,4 +188,34 @@
   width: 20px;
   height: 3px;
   background-color: darken($hr, 40%);
+}
+
+.social-vote__item--upvote:hover {
+  border: 1px solid $secondary;
+  background-color: $secondary;
+
+  i,
+  p{
+    color: $white;
+  }
+}
+
+.social-vote__item--mehvote:hover {
+  border: 1px solid $hr;
+  background-color: $hr;
+
+  i,
+  p{
+    color: $primary;
+  }
+}
+
+.social-vote__item--downvote:hover {
+  border: 1px solid $icon-primary;
+  background-color: $icon-primary;
+
+  i,
+  p{
+    color: $white;
+  }
 }

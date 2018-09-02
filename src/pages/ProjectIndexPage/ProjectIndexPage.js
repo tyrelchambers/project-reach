@@ -83,29 +83,32 @@ class ProjectIndexPage extends Component {
                             <h4 className="bold">Project interest</h4>
                             <p>{data.projectById.comments.length} reviews</p>
                           </div>
-                          <div className="row">
+                          <div className="row jc-sb">
                             <div className="row social-vote__list">
-                              <div className="social-vote__item ai-c jc-c row">
+                              <div className="social-vote__item ai-c jc-c row social-vote__item--upvote">
                                 <i className="far fa-thumbs-up icon"></i>
                                 <p>42</p>
                               </div>
-                              <div className="social-vote__item ai-c jc-c row">
+                              <div className="social-vote__item ai-c jc-c row social-vote__item--mehvote">
                                 <div className="dash icon"></div>
                                 <p>10</p>
                               </div>
-                              <div className="social-vote__item ai-c jc-c row">
+                              <div className="social-vote__item ai-c jc-c row social-vote__item--downvote">
                                 <i class="far fa-thumbs-down icon"></i>
                                 <p>3</p>
                               </div>
                             </div>
+                            <p className="btn btn-secondary">
+                              Give Feedback
+                            </p>
                           </div>
-                        </div>
-                        <ProjectCommentForm project_id={slug}/>
-                        {data.projectById.comments.map((x, id) => {
-                          return(
-                            <ProjectComment comment={x.comment} creator={x.creator} key={id} />
-                          )
-                        })}
+                          <hr className="hr"/>
+                          {data.projectById.comments.map((x, id) => {
+                            return(
+                              <ProjectComment comment={x.comment} creator={x.creator} key={id} />
+                            )
+                          })}
+                        </div>                        
                       </div>
                     </div>
                   </div>
