@@ -3,11 +3,11 @@ import './ProjectIndexPage.scss';
 import '../../assets/stylesheets/btn.scss';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
-import ProjectCommentForm from '../../components/Forms/ProjectCommentForm';
 import ProjectComment from '../../components/ProjectComment/ProjectComment';
 import { observer, inject } from 'mobx-react';
 import moment from 'moment';
 import LoadingSplash from '../../components/LoadingSplash/LoadingSplash';
+import ProjectCommentModal from '../../components/Modals/ProjectCommentModal/ProjectCommentModal';
 
 const FIND_PROJECT = gql`
   query projectById($project_id:String) {
@@ -24,12 +24,14 @@ const FIND_PROJECT = gql`
     }
   }
 `;
-@inject('AuthStore')
+@inject('AuthStore', 'ProjectStore')
 @observer
 class ProjectIndexPage extends Component {
+
   render() {
     const slug = this.props.match.params.project_slug;
     return(
+      <React.Fragment>
       <Query
         query={FIND_PROJECT}
         variables={{project_id: slug}}
@@ -94,13 +96,16 @@ class ProjectIndexPage extends Component {
                                 <p>10</p>
                               </div>
                               <div className="social-vote__item ai-c jc-c row social-vote__item--downvote">
-                                <i class="far fa-thumbs-down icon"></i>
+                                <i className="far fa-thumbs-down icon"></i>
                                 <p>3</p>
                               </div>
                             </div>
-                            <p className="btn btn-secondary">
+                            <button className="btn btn-secondary" onClick={() => {
+                              console.log(this.props.ProjectStore.modalOpen);
+                              this.props.ProjectStore.toggleCommentModal(true);                   
+                            }}>
                               Give Feedback
-                            </p>
+                            </button>
                           </div>
                           <hr className="hr"/>
                           {data.projectById.comments.map((x, id) => {
@@ -108,6 +113,7 @@ class ProjectIndexPage extends Component {
                               <ProjectComment comment={x.comment} creator={x.creator} key={id} />
                             )
                           })}
+                          
                         </div>                        
                       </div>
                     </div>
@@ -145,6 +151,11 @@ class ProjectIndexPage extends Component {
           );
         }}
       </Query>
+      {this.props.ProjectStore.commentFormModalOpen && 
+        <ProjectCommentModal />
+      
+      }
+      </React.Fragment>
     );
   }
 }

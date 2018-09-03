@@ -8,9 +8,14 @@ class ProjectStore {
     @observable headline = "";
     @observable modalOpen = false;
     @observable updateModalOpen = false;
+    @observable commentFormModalOpen = true;
 
     @action toggleProjectModal = (isOpen = false) => {
         this.modalOpen = isOpen;
+    }
+
+    @action toggleCommentModal = (isOpen = false) => {
+        this.commentFormModalOpen = isOpen;
     }
 
     @action toggleUpdateProjectModal = (isOpen = false, {title, description, project_id, creator, headline}) => {

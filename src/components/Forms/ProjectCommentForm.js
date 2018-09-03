@@ -42,12 +42,44 @@ class ProjectCommentForm extends Component {
   }
   render() {
     return(
-      <form className="form wide styled-block-form" onSubmit={this.submitHandler}>
+      <form className="form center" onSubmit={this.submitHandler}>
+        <div className="form-group column ai-c">
+          <h3 className="bold">Is the project interesting?</h3>
+          <div className="row social-vote__list">
+            <div className="social-vote__item ai-c jc-c row social-vote__item--upvote">
+              <i className="far fa-thumbs-up icon no-margin"></i>
+            </div>
+            <div className="social-vote__item ai-c jc-c row social-vote__item--mehvote">
+              <div className="dash icon no-margin"></div>
+            </div>
+            <div className="social-vote__item ai-c jc-c row social-vote__item--downvote">
+              <i className="far fa-thumbs-down icon no-margin"></i>
+            </div>
+          </div>
+        </div>
+        <div className="row jc-sb">
+          <div className="form-group ai-c">
+            <h3>Pros:</h3>
+            <select name="pros-list" className="select-field" id="prosList">
+              <option value="" disabled selected>Pick a pro</option>
+              <option value="interesting-idea">Interesting Idea</option>
+            </select>
+          </div>
+
+          <div className="form-group ai-c">
+            <h3>Cons:</h3>
+            <select name="pros-list" className="select-field" id="consList">
+              <option value="" disabled selected>Pick a con</option>
+              <option value="not-feasible">Not feasible</option>
+            </select>
+          </div>
+        </div>
         <div className="form-group">
+          <label htmlFor="comment">Leave your feedback</label>
           <textarea type="text" placeholder="Add a comment" className="input" onChange={this.commentHandler} name="comment" />
         </div>
 
-        <button className="btn btn-primary">Post Comment</button>
+        <button className="btn btn-secondary">Post Comment</button>
       </form>
     );
   }
