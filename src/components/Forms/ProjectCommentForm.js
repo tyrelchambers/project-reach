@@ -75,11 +75,14 @@ class ProjectCommentForm extends Component {
           </div>
         </div>
         <div className="form-group">
-          <label htmlFor="comment">Leave your feedback</label>
+          <h3 className="bold">Leave your feedback</h3>
           <textarea type="text" placeholder="Add a comment" className="input" onChange={this.commentHandler} name="comment" />
         </div>
 
-        <button className="btn btn-secondary">Post Comment</button>
+        <div className="form-actions jc-fe ">
+          <button className="btn btn-secondary">Post Comment</button>
+
+        </div>
       </form>
     );
   }

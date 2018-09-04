@@ -20,12 +20,9 @@
 }
 
 .form-group {
-  margin: 0.5em 0;
-}
-
-.form-group {
   display:flex;
   flex-direction: column;
+  margin: 0.5em 0;
   margin-top: 1em;
 }
 
@@ -58,4 +55,9 @@ textarea {
 
   -moz-appearance: none;
   -webkit-appearance: none;
+}
+
+.form-actions {
+  display: flex;
+  width: 100%;
 }
