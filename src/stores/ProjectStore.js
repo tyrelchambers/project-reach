@@ -8,7 +8,7 @@ class ProjectStore {
     @observable headline = "";
     @observable modalOpen = false;
     @observable updateModalOpen = false;
-    @observable commentFormModalOpen = true;
+    @observable commentFormModalOpen = false;
 
     @action toggleProjectModal = (isOpen = false) => {
         this.modalOpen = isOpen;

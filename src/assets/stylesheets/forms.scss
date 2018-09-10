@@ -47,6 +47,8 @@ textarea {
 
 .select-field {
   width: 150px;
+  height: 100px;
+  overflow: scroll;
   padding: 1em 0.5em;
   background-color: lighten($hr, 5%);
   border: none;

@@ -15,19 +15,70 @@ class ProjectCommentForm extends Component {
   constructor() {
     super();
     this.state = {
-      comment: ""
+      comment: "",
+      interestRating: "",
+      pros: "",
+      cons: "",
+      prosList: [
+        {
+          value: "interesting-idea",
+          option: "Interesting Idea"
+        },
+        {
+          value: "interesting-idea",
+          option: "Interesting Idea"
+        },
+        {
+          value: "interesting-idea",
+          option: "Interesting Idea"
+        },
+        {
+          value: "interesting-idea",
+          option: "Interesting Idea"
+        },
+        {
+          value: "interesting-idea",
+          option: "Interesting Idea"
+        },
+        {
+          value: "interesting-idea",
+          option: "Interesting Idea"
+        },
+        {
+          value: "interesting-idea",
+          option: "Interesting Idea"
+        },
+        {
+          value: "interesting-idea",
+          option: "Interesting Idea"
+        },
+        {
+          value: "interesting-idea",
+          option: "Interesting Idea"
+        }
+      ],
+      consList: [{
+        value: "interesting-idea",
+        option: "Interesting Idea"
+      }]
     }
   }
   _postCommentHandler = () => {
-    const { comment } = this.state;
+    const { comment, interestRating, pros, cons } = this.state;
     const project_id = this.props.project_id;
-    this.props.postCommentMutation({
-      variables: {
-        comment,
-        project_id,
-        creator: this.props.AuthStore.getCookie()
-      }
-    });
+    
+    // this.props.postCommentMutation({
+    //   variables: {
+    //     comment,
+    //     interestRating,
+    //     pros,
+    //     cons,
+    //     project_id,
+    //     creator: this.props.AuthStore.getCookie()
+    //   }
+    // });
+
+    console.log(comment, + ' ' + interestRating + ' ' + pros + " " + cons + " " + project_id);
   }
 
   submitHandler = (e) => {
@@ -40,6 +91,8 @@ class ProjectCommentForm extends Component {
 
     this.setState({comment: value});
   }
+
+
   render() {
     return(
       <form className="form center" onSubmit={this.submitHandler}>
@@ -60,18 +113,12 @@ class ProjectCommentForm extends Component {
         <div className="row jc-sb">
           <div className="form-group ai-c">
             <h3>Pros:</h3>
-            <select name="pros-list" className="select-field" id="prosList">
-              <option value="" disabled selected>Pick a pro</option>
-              <option value="interesting-idea">Interesting Idea</option>
-            </select>
+            <ProComponent prosList={this.state.prosList} />
           </div>
 
           <div className="form-group ai-c">
             <h3>Cons:</h3>
-            <select name="pros-list" className="select-field" id="consList">
-              <option value="" disabled selected>Pick a con</option>
-              <option value="not-feasible">Not feasible</option>
-            </select>
+            <ConComponent consList={this.state.consList} />
           </div>
         </div>
         <div className="form-group">
@@ -88,4 +135,25 @@ class ProjectCommentForm extends Component {
   }
 }
 
+const ProComponent = (props) => {
+  return(
+    <select name="pros-list" className="select-field" id="prosList" multiple>
+      <option value="Pick a con" disabled selected>Pick a pro</option>
+      {props.prosList.map((x, id) => (
+        <option key={id} value={x.value}>{x.option}</option>
+      ))}
+    </select>
+  );
+}
+
+const ConComponent = (props) => {
+  return(
+    <select name="cons-list" className="select-field" id="consList" multiple>
+      <option value="Pick a con" disabled selected>Pick a con</option>
+      {props.consList.map((x, id) => (
+        <option key={id} value={x.value}>{x.option}</option>
+      ))}
+    </select>
+  );
+}
 export default graphql(POST_COMMENT, { name: "postCommentMutation" })(ProjectCommentForm);
