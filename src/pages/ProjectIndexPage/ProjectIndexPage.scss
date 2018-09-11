@@ -1,32 +1,5 @@
 @import '../../colours.scss';
 
-.modal__wrapper {
-  width:100%;
-  cursor: default;
-  background-color: rgba($primary, 0.4);
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 99;
-  overflow: scroll;
-}
-
-.modal__content {
-  width: 100%;
-  max-width: 600px;
-  background-color: darken($white, 5%);
-  border-radius: 10px;
-  padding: 1.5em;
-  box-shadow: 0px 1px 3px 1px rgba(black, 0.2);
-  margin-top: 3em;
-  position: absolute;
-  z-index: 100;
-  top: 0.8em;
-  left: 50%;
-  transform: translateX(-50%);
-}
 .header.small {
 
   background-color: transparent;
@@ -57,7 +30,7 @@
   width: 300px;
   background-color: $white;
   padding: 1em;
-  border: 1px solid hsl(0, 0%, 84.3%);
+  border: 1px solid rgba($hr, 70%);
 }
 
 .about__creator--header {
@@ -110,4 +83,118 @@
 
 .description {
   margin: 1em 0;
+}
+
+.project-thumbnail {
+  height: 75px;
+  width: 75px;
+  background-color: rebeccapurple;
+  margin-right: 25px;
+}
+
+.project__header {
+  margin-bottom: 20px;
+}
+
+.thumbnail__list {
+  margin: 15px 0;
+}
+
+.thumbnail__item {
+  height: 70px;
+  width: 70px;
+  background-color: rebeccapurple;
+
+  &:not(:last-child) {
+    margin-right: 10px;
+  }
+}
+
+.logo.small {
+  width: 15px;
+  height: 15px;
+}
+
+.project__website-link {
+  padding: 0.3em 0.8em;
+  border: 1px solid rgba($hr, 70%);
+  background-color: $white;
+  margin: 20px 0;
+
+  p {
+    margin: 0;
+  }
+}
+
+.feedback {
+  padding: 0em 1em;
+  padding-bottom: 1em;
+  background-color: $white;
+  border-radius: 5px;
+  border:1px solid rgba($hr, 70%)
+}
+
+.social-vote__item {
+  height: 30px;
+  min-width: 40px;
+  display: flex;
+  align-self: center;
+  border:1px solid rgba($hr, 70%);
+  padding: 0.4em 0.8em;
+  border-radius: 5px;
+  &:not(:last-child) {
+    margin-right: 15px;
+  }
+
+  .icon {
+    margin-right: 5px;
+  }
+
+  i {
+    color: darken($hr, 40%);
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
+.dash {
+  width: 20px;
+  height: 3px;
+  background-color: darken($hr, 40%);
+}
+
+.social-vote__item--upvote:hover {
+  border: 1px solid $secondary;
+  background-color: $secondary;
+
+  i,
+  p{
+    color: $white;
+  }
+}
+
+.social-vote__item--mehvote:hover {
+  border: 1px solid $hr;
+  background-color: $hr;
+
+  i,
+  p{
+    color: $primary;
+  }
+}
+
+.social-vote__item--downvote:hover {
+  border: 1px solid $icon-primary;
+  background-color: $icon-primary;
+
+  i,
+  p{
+    color: $white;
+  }
+}
+
+.selected-vote {
+  border: 1px solid $purple;
 }

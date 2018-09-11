@@ -1,10 +1,11 @@
 @import '../../colours.scss';
 
 .modal__wrapper {
-  width:100%;
+  width:100vw;
+  height: 100vh;
   cursor: default;
-  background-color: rgba($primary, 0.4);
-  position: absolute;
+  background-color: rgba($primary, 0.7);
+  position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
@@ -16,12 +17,12 @@
 .modal__content {
   width: 100%;
   max-width: 600px;
-  background-color: darken($white, 5%);
+  background-color: $white;
   border-radius: 10px;
   padding: 1.5em;
   box-shadow: 0px 1px 3px 1px rgba(black, 0.2);
   margin-top: 3em;
-  position: absolute;
+  position: relative;
   z-index: 100;
   top: 0.8em;
   left: 50%;

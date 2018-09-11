@@ -1,8 +1,24 @@
 .subtitle {
-  color:darken($hr, 30%);
+  color:darken($hr, 70%);
   font-weight: 300;
 }
 
 .no-decoration { 
   text-decoration: none;
+}
+
+.title.no-margin-bottom {
+  margin-bottom: 0;
+}
+
+.thin {
+  font-weight: 300;
+}
+
+.blue {
+  color: $blue;
+}
+
+.underline {
+  text-decoration: underline;
 }

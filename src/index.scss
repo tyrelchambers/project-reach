@@ -45,7 +45,11 @@ hr {
   border: 0px solid white;
 }
 
-.tc-c {
+.relative {
+  position: relative;
+}
+
+.ta-c {
   text-align: center;
 }
 
@@ -70,6 +74,9 @@ hr {
   justify-content: space-between;
 }
 
+.jc-fe {
+  justify-content: flex-end;
+}
 .bold {
   font-weight: 700;
 }
@@ -93,6 +100,10 @@ hr {
 .container {
   width: 100%;
   max-width: 1300px;
+
+  aside {
+    margin-top: 0;
+  }
 }
 
 .container.small {
@@ -101,7 +112,7 @@ hr {
 }
 
 .center {
-  margin: 0 auto;
+  margin: 20px auto;
 }
 
 .half {
@@ -142,4 +153,8 @@ pre {
   font-family: 'Muli', sans-serif;
   font-size: 0.8rem;
   color: $primary;
+}
+
+.no-margin {
+  margin: 0 !important;
 }
