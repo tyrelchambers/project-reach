@@ -19,50 +19,34 @@ class ProjectCommentForm extends Component {
       interestRating: "",
       pros: "",
       cons: "",
+      selectedPros: [],
       prosList: [
-        {
-          value: "interesting-idea",
-          option: "Interesting Idea"
-        },
-        {
-          value: "interesting-idea",
-          option: "Interesting Idea"
-        },
-        {
-          value: "interesting-idea",
-          option: "Interesting Idea"
-        },
-        {
-          value: "interesting-idea",
-          option: "Interesting Idea"
-        },
-        {
-          value: "interesting-idea",
-          option: "Interesting Idea"
-        },
-        {
-          value: "interesting-idea",
-          option: "Interesting Idea"
-        },
-        {
-          value: "interesting-idea",
-          option: "Interesting Idea"
-        },
-        {
-          value: "interesting-idea",
-          option: "Interesting Idea"
-        },
-        {
-          value: "interesting-idea",
-          option: "Interesting Idea"
-        }
+        "Interesting Idea",
+        "Good Business Model",
+        "High Potential",
+        "Good Design Mockups",
+        "Respected Founder",
+        "Respected Team"
       ],
       consList: [{
-        value: "interesting-idea",
         option: "Interesting Idea"
       }]
     }
   }
+
+  componentDidMount = () => {
+    const list = document.querySelector("#proSelectorList");
+    const listItems = list.querySelectorAll(".selector__wrapper--item");
+
+    listItems.forEach(x => {
+      x.addEventListener('click', () => {
+        this.selectorHandler(x);
+      });
+    });
+    console.log(this.state.selectedPros);
+
+  }
+
   _postCommentHandler = () => {
     const { comment, interestRating, pros, cons } = this.state;
     const project_id = this.props.project_id;
@@ -78,7 +62,7 @@ class ProjectCommentForm extends Component {
     //   }
     // });
 
-    console.log(comment, + ' ' + interestRating + ' ' + pros + " " + cons + " " + project_id);
+    //console.log(comment, + ' ' + interestRating + ' ' + pros + " " + cons + " " + project_id);
   }
 
   submitHandler = (e) => {
@@ -92,7 +76,18 @@ class ProjectCommentForm extends Component {
     this.setState({comment: value});
   }
 
+  getSelectedPros = () => {
+    const selected = document.querySelectorAll('.active-item');
+    const wrapper = document.querySelector(".selector__wrapper");
+    let arr = [...selected];
 
+    this.setState({selectedPros: [...arr]});
+    wrapper.classList.add('hidden');
+  }
+
+  selectorHandler = (x) => {
+    x.classList.toggle('active-item');
+  }
   render() {
     return(
       <form className="form center" onSubmit={this.submitHandler}>
@@ -110,10 +105,16 @@ class ProjectCommentForm extends Component {
             </div>
           </div>
         </div>
-        <div className="row jc-sb">
-          <div className="form-group ai-c">
+        <div className="row jc-sb relative">
+          <div className="form-group ai-c ">
             <h3>Pros:</h3>
-            <ProComponent prosList={this.state.prosList} />
+            <div className="column">
+              {
+                this.state.selectedPros.map((x, id) => <p key={id} className="selected-feedback ta-c">{x.innerHTML}</p>)
+              }
+            </div>
+            <p className="thin blue underline" onClick={() => document.querySelector('.selector__wrapper').classList.remove('hidden')}>{this.state.selectedPros.length < 1 ? "+ add pro(s)" : "edit pros"}</p>
+            <ProComponent prosList={this.state.prosList} clicked={this.getSelectedPros}/>
           </div>
 
           <div className="form-group ai-c">
@@ -137,19 +138,21 @@ class ProjectCommentForm extends Component {
 
 const ProComponent = (props) => {
   return(
-    <select name="pros-list" className="select-field" id="prosList" multiple>
-      <option value="Pick a con" disabled selected>Pick a pro</option>
-      {props.prosList.map((x, id) => (
-        <option key={id} value={x.value}>{x.option}</option>
-      ))}
-    </select>
+    <div className="selector__wrapper hidden">
+      <ul id="proSelectorList">
+        {props.prosList.map((x, id) => (
+          <li key={id} className="selector__wrapper--item">{x}</li>
+        ))}
+      </ul>
+      <button className="btn btn-primary" onClick={props.clicked}>Add Selected</button>
+    </div>
   );
 }
 
 const ConComponent = (props) => {
   return(
     <select name="cons-list" className="select-field" id="consList" multiple>
-      <option value="Pick a con" disabled selected>Pick a con</option>
+      <option value="Pick a con" disabled >Pick a con</option>
       {props.consList.map((x, id) => (
         <option key={id} value={x.value}>{x.option}</option>
       ))}
