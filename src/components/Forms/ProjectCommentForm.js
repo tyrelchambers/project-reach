@@ -3,13 +3,13 @@ import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { observer, inject} from 'mobx-react';
 
-const POST_COMMENT = gql`
-  mutation postComment($comment: String, $project_id: String, $creator: String) {
-    postComment(comment: $comment, project_id: $project_id, creator: $creator)
+const POST_FEEDBACK = gql`
+  mutation postFeedback($comment: String, $project_id: String, $creator: String, $interestRating: String, $pros: [String], $cons: [String]) {
+    postFeedback(comment: $comment, project_id: $project_id, creator: $creator, interestRating: $interestRating, pros: $pros, cons: $cons)
   }
 `;
 
-@inject('AuthStore')
+@inject('AuthStore', "ProjectStore")
 @observer
 class ProjectCommentForm extends Component {
   constructor() {
@@ -42,35 +42,42 @@ class ProjectCommentForm extends Component {
 
   componentDidMount = () => {
     const listItems = document.querySelectorAll(".selector__wrapper--item");
+    const voteItems = document.querySelectorAll(".social-vote__item");
 
     listItems.forEach(x => {
       x.addEventListener('click', () => {
         this.selectorHandler(x);
       });
     });
+
+    voteItems.forEach(x => {
+      x.addEventListener('click', () => {
+        this.getInterestRating(x);
+      });
+    });
   }
 
-  _postCommentHandler = () => {
-    const { comment, interestRating, pros, cons } = this.state;
+  _postFeedbackHandler = () => {
+    const { comment, interestRating, selectedPros, selectedCons } = this.state;
     const project_id = this.props.project_id;
     
-    // this.props.postCommentMutation({
-    //   variables: {
-    //     comment,
-    //     interestRating,
-    //     pros,
-    //     cons,
-    //     project_id,
-    //     creator: this.props.AuthStore.getCookie()
-    //   }
-    // });
 
-    //console.log(comment, + ' ' + interestRating + ' ' + pros + " " + cons + " " + project_id);
+    this.props.postFeedbackMutation({
+      variables: {
+        comment,
+        interestRating,
+        project_id,
+        pros: [...selectedPros],
+        cons: [...selectedCons],
+        creator: this.props.AuthStore.getCookie()
+      }
+    });
   }
 
   submitHandler = (e) => {
     e.preventDefault();
-    this._postCommentHandler();
+    this._postFeedbackHandler();
+    this.props.ProjectStore.toggleCommentModal();
   }
 
   commentHandler = (e) => {
@@ -83,7 +90,11 @@ class ProjectCommentForm extends Component {
     const wrapper = document.querySelector("#proSelectorList");
     const selected = wrapper.querySelectorAll('.active-item');
     
-    let arr = [...selected];
+    let arr = [];
+
+    selected.forEach(x => {
+      arr.push(x.innerHTML);
+    });
 
     this.setState({selectedPros: [...arr]});
     wrapper.classList.add('hidden');
@@ -92,7 +103,11 @@ class ProjectCommentForm extends Component {
   getSelectedCons = () => {
     const wrapper = document.querySelector("#conSelectorList");
     const selected = wrapper.querySelectorAll('.active-item');
-    let arr = [...selected];
+    let arr = [];
+
+    selected.forEach(x => {
+      arr.push(x.innerHTML);
+    });
 
     this.setState({selectedCons: [...arr]});
     wrapper.classList.add('hidden');
@@ -101,19 +116,31 @@ class ProjectCommentForm extends Component {
   selectorHandler = (x) => {
     x.classList.toggle('active-item');
   }
+
+  getInterestRating = (x) => {
+    const childs = x.parentNode.childNodes;
+    
+    childs.forEach(x => x.classList.remove('selected-vote'));
+    x.classList.toggle('selected-vote');
+
+    const vote = document.querySelector('.selected-vote');
+    const voteRating = vote.getAttribute('data-vote');
+
+    this.setState({interestRating: voteRating});
+  }
   render() {
     return(
       <form className="form center" onSubmit={this.submitHandler}>
         <div className="form-group column ai-c">
           <h3 className="bold">Is the project interesting?</h3>
           <div className="row social-vote__list">
-            <div className="social-vote__item ai-c jc-c row social-vote__item--upvote">
+            <div className="social-vote__item ai-c jc-c row" id="social-vote__item--upvote" data-vote="yes">
               <i className="far fa-thumbs-up icon no-margin"></i>
             </div>
-            <div className="social-vote__item ai-c jc-c row social-vote__item--mehvote">
+            <div className="social-vote__item ai-c jc-c row " id="social-vote__item--mehvote" data-vote="maybe">
               <div className="dash icon no-margin"></div>
             </div>
-            <div className="social-vote__item ai-c jc-c row social-vote__item--downvote">
+            <div className="social-vote__item ai-c jc-c row " id="social-vote__item--downvote" data-vote="no">
               <i className="far fa-thumbs-down icon no-margin"></i>
             </div>
           </div>
@@ -125,7 +152,7 @@ class ProjectCommentForm extends Component {
             <h3>Pros:</h3>
             <div className="column">
               {
-                this.state.selectedPros.map((x, id) => <p key={id} className="selected-feedback ta-c">{x.innerHTML}</p>)
+                this.state.selectedPros.map((x, id) => <p key={id} className="selected-feedback ta-c">{x}</p>)
               }
             </div>
             <p className="thin blue underline" onClick={() => document.querySelector('#proSelectorList').classList.remove('hidden')}>{this.state.selectedPros.length < 1 ? "+ add pro(s)" : "edit pros"}</p>
@@ -137,7 +164,7 @@ class ProjectCommentForm extends Component {
             <h3>Cons:</h3>
             <div className="column">
               {
-                this.state.selectedCons.map((x, id) => <p key={id} className="selected-feedback ta-c">{x.innerHTML}</p>)
+                this.state.selectedCons.map((x, id) => <p key={id} className="selected-feedback ta-c">{x}</p>)
               }
             </div>
             <p className="thin blue underline" onClick={() => document.querySelector('#conSelectorList').classList.remove('hidden')}>{this.state.selectedCons.length < 1 ? "+ add con(s)" : "edit cons"}</p>
@@ -166,7 +193,7 @@ const ProComponent = (props) => {
           <li key={id} className="selector__wrapper--item">{x}</li>
         ))}
       </ul>
-      <button className="btn btn-primary" onClick={props.clicked}>Add Selected</button>
+      <p className="btn btn-primary" onClick={props.clicked}>Add Selected</p>
     </div>
   );
 }
@@ -179,8 +206,8 @@ const ConComponent = (props) => {
           <li key={id} className="selector__wrapper--item">{x}</li>
         ))}
       </ul>
-      <button className="btn btn-primary" onClick={props.clicked}>Add Selected</button>
+      <p className="btn btn-primary" onClick={props.clicked}>Add Selected</p>
     </div>
   );
 }
-export default graphql(POST_COMMENT, { name: "postCommentMutation" })(ProjectCommentForm);
+export default graphql(POST_FEEDBACK, { name: "postFeedbackMutation" })(ProjectCommentForm);

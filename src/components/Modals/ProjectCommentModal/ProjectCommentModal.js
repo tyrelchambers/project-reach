@@ -15,7 +15,7 @@ export default class ProjectCommentModal extends Component {
             <span onClick={() => this.props.ProjectStore.toggleCommentModal(false)}>X</span>
           </header>
 
-          <ProjectCommentForm />
+          <ProjectCommentForm project_id={this.props.project_id}/>
         </div>  
       </div>
     )

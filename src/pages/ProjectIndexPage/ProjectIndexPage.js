@@ -15,7 +15,7 @@ const FIND_PROJECT = gql`
       title,
       description,
       headline,
-      comments {
+      feedback {
         comment,
         creator,
         created_at
@@ -83,7 +83,7 @@ class ProjectIndexPage extends Component {
                         <div className="feedback">
                           <div className="row jc-sb ai-c">
                             <h4 className="bold">Project interest</h4>
-                            <p>{data.projectById.comments.length} reviews</p>
+                            <p>{data.projectById.feedback.length} reviews</p>
                           </div>
                           <div className="row jc-sb">
                             <div className="row social-vote__list">
@@ -108,7 +108,7 @@ class ProjectIndexPage extends Component {
                             </button>
                           </div>
                           <hr className="hr"/>
-                          {data.projectById.comments.map((x, id) => {
+                          {data.projectById.feedback.map((x, id) => {
                             return(
                               <ProjectComment comment={x.comment} creator={x.creator} key={id} />
                             )
@@ -152,7 +152,7 @@ class ProjectIndexPage extends Component {
         }}
       </Query>
       {this.props.ProjectStore.commentFormModalOpen && 
-        <ProjectCommentModal />
+        <ProjectCommentModal project_id={this.props.match.params.project_slug}/>
       
       }
       </React.Fragment>
