@@ -18,7 +18,10 @@ const FIND_PROJECT = gql`
       feedback {
         comment,
         creator,
-        created_at
+        created_at,
+        pros,
+        cons,
+        interestRating
       },
       created_at
     }
@@ -110,7 +113,7 @@ class ProjectIndexPage extends Component {
                           <hr className="hr"/>
                           {data.projectById.feedback.map((x, id) => {
                             return(
-                              <ProjectComment comment={x.comment} creator={x.creator} key={id} />
+                              <ProjectComment interestRating={x.interestRating} pros={x.pros} cons={x.cons} comment={x.comment} creator={x.creator} key={id} />
                             )
                           })}
                           
