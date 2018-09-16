@@ -9,7 +9,10 @@ const ALL_PROJECTS = gql`
     allProjects {
       title,
       headline,
-      _id
+      _id,
+      feedback {
+        comment
+      }
     }
   }
 `;
@@ -29,7 +32,7 @@ class ProjectList extends Component {
                   <h3>All Projects</h3>
                   {data.allProjects.map((x,id) => {
                     return(
-                      <Projects key={id} id={x._id} title={x.title} headline={x.headline}/>
+                      <Projects key={id} id={x._id} title={x.title} headline={x.headline} commentCount={x.feedback.length}/>
                     );
                   })}
                 </div>
@@ -62,7 +65,7 @@ const Projects = (props) => {
           </div>
           <div className="row ">
             <i className="far fa-comment light-grey"></i>
-            <p className="bold">12</p>
+            <p className="bold">{props.commentCount}</p>
           </div>
         </div>
       </div>
