@@ -15,7 +15,7 @@ class IndexPage extends Component {
                 <p>Here you can pitch your idea, gain feedback, and attract other people with skills to help you get your project/idea, started.</p>
               </div>
               <div className="half column">
-                <p className="bold secondary tc-c">Sign up and begin your journey</p>
+                <p className="bold secondary ta-c">Sign up and begin your journey</p>
                 <NavLink to="/signup" className="btn btn-primary">Sign Up</NavLink>
               </div>
             </div>
