@@ -12,7 +12,6 @@ export default class Projects extends Component {
     return (
       <div className="dashboard__panel">
         <h1 className="dashboard__title">Projects</h1>
-        <hr className="hr"/>
 
         <button 
           className="btn btn-primary" 

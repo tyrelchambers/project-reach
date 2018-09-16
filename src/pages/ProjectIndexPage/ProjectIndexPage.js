@@ -8,6 +8,7 @@ import { observer, inject } from 'mobx-react';
 import moment from 'moment';
 import LoadingSplash from '../../components/LoadingSplash/LoadingSplash';
 import ProjectCommentModal from '../../components/Modals/ProjectCommentModal/ProjectCommentModal';
+import ProjectUpvote from '../../components/ProjectUpvote/ProjectUpvote';
 
 const FIND_PROJECT = gql`
   query projectById($project_id:String) {
@@ -30,6 +31,17 @@ const FIND_PROJECT = gql`
 @inject('AuthStore', 'ProjectStore')
 @observer
 class ProjectIndexPage extends Component {
+  constructor() {
+    super();
+    this.state = {
+      projectUpvote: 0
+    }
+  }
+
+  projectHandler = () => {
+    console.log(this.state.projectUpvote);
+    this.setState({projectUpvote: this.state.projectUpvote + 1});
+  }
 
   render() {
     const slug = this.props.match.params.project_slug;
@@ -104,7 +116,6 @@ class ProjectIndexPage extends Component {
                               </div>
                             </div>
                             <button className="btn btn-secondary" onClick={() => {
-                              console.log(this.props.ProjectStore.modalOpen);
                               this.props.ProjectStore.toggleCommentModal(true);                   
                             }}>
                               Give Feedback
@@ -124,7 +135,7 @@ class ProjectIndexPage extends Component {
                 </main>
                 <aside>
                   <div className="project__upvote ">
-                    <p className="bold uppercase btn btn-primary no-margin">upvote 1,600</p>
+                    <ProjectUpvote upvote={this.projectHandler} count={this.state.projectUpvote}/>
                   </div>
                   <div className="row project__website-link jc-sb ai-c">
                     <div className="column">

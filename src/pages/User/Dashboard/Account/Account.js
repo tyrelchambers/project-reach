@@ -5,6 +5,7 @@ import { observer, inject } from 'mobx-react';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 import ConfirmPasswordModal from '../../../../components/Modals/ConfirmPasswordModal/ConfirmPasswordModal';
+import Profile from './Profile';
 
 const UPDATE_ACCOUNT = gql`
   mutation updateAccount($email: String, $password: String, $username: String, $creator: String) {
@@ -68,8 +69,9 @@ class Account extends Component {
   render() {
     return (
       <div className="dashboard__panel">
+        <Profile/>
+
         <h1 className="dashboard__title">Account</h1>
-        <hr className="hr"/>
         <div className="row account__sub-panel">
           <main className="account__main">
             <AccountForm usernameHandler={this.usernameHandler} submitted={this.submitted} emailHandler={this.emailHandler} passwordHandler={this.passwordHandler} />
