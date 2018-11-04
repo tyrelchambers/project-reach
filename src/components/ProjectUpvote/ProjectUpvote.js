@@ -32,9 +32,6 @@ class ProjectUpvote extends React.Component {
   hasBeenUpvoted = () => {
     const user = this.props.AuthStore.getEmail();
     const upvoterList = this.props.upvoterList;
-    console.log('====================================');
-    console.log(upvoterList);
-    console.log('====================================');
     upvoterList.map(x => {
       if ( x === user ) {
         this.disabled = true;
