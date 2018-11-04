@@ -24,27 +24,18 @@ const FIND_PROJECT = gql`
         cons,
         interestRating
       },
-      created_at
+      created_at,
+      upvote,
+      upvoters
     }
   }
 `;
 @inject('AuthStore', 'ProjectStore')
 @observer
 class ProjectIndexPage extends Component {
-  constructor() {
-    super();
-    this.state = {
-      projectUpvote: 0
-    }
-  }
-
-  projectHandler = () => {
-    console.log(this.state.projectUpvote);
-    this.setState({projectUpvote: this.state.projectUpvote + 1});
-  }
-
   render() {
     const slug = this.props.match.params.project_slug;
+    const upvoter = this.props.AuthStore.getEmail();
     return(
       <React.Fragment>
       <Query
@@ -55,6 +46,7 @@ class ProjectIndexPage extends Component {
           if (loading) return <LoadingSplash/>;
           if (error) return error;
           const created_at = data.projectById.created_at;
+          const upvoters = [...data.projectById.upvoters];
           return (
             <div className="container small center">
               <header className="row project__header jc-sb ai-c">
@@ -135,7 +127,7 @@ class ProjectIndexPage extends Component {
                 </main>
                 <aside>
                   <div className="project__upvote ">
-                    <ProjectUpvote upvote={this.projectHandler} count={this.state.projectUpvote}/>
+                    <ProjectUpvote upvoterList={upvoters} upvoters={upvoter} projectId={slug} upvoteCount={data.projectById.upvote}/>
                   </div>
                   <div className="row project__website-link jc-sb ai-c">
                     <div className="column">

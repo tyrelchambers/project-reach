@@ -47,11 +47,11 @@ class AuthStore {
   }
 
   getEmail = () => {
-    window.localStorage.getItem("email");
+    return window.localStorage.getItem("email");
   }
 
   getUsername = () => {
-    window.localStorage.getItem("username");
+    return window.localStorage.getItem("username");
   }
 
   logoutUser = () => {

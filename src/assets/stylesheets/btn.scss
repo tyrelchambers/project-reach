@@ -38,3 +38,7 @@
     background-color: darken($purple, 5%);
   }
 }
+
+.btn.disabled {
+  background-color: $nav-primary !important;
+}
