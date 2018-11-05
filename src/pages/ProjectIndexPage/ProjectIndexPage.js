@@ -26,7 +26,11 @@ const FIND_PROJECT = gql`
       },
       created_at,
       upvote,
-      upvoters
+      upvoters,
+      website,
+      twitter,
+      facebook,
+      instagram
     }
   }
 `;
@@ -129,13 +133,13 @@ class ProjectIndexPage extends Component {
                   <div className="project__upvote ">
                     <ProjectUpvote upvoterList={upvoters} upvoters={upvoter} projectId={slug} upvoteCount={data.projectById.upvote}/>
                   </div>
-                  <div className="row project__website-link jc-sb ai-c">
+                  <a href={"http://" + data.projectById.website} target="_blank" className="row project__website-link jc-sb ai-c td-n">
                     <div className="column">
                       <p className="bold">Website</p>
-                      <p>www.project.com</p>
+                      <p>{data.projectById.website}</p>
                     </div>
                     <img src={require('../../assets/002-scale-symbol.png')} className="logo small" alt="External Link Button"/>
-                  </div>
+                  </a>
                   <div className="about__creator">
                     <h4 className="no-margin">Tyrel Chambers</h4>  
                     <p>
