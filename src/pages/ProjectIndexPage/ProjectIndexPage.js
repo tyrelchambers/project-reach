@@ -8,6 +8,7 @@ import { observer, inject } from 'mobx-react';
 import moment from 'moment';
 import LoadingSplash from '../../components/LoadingSplash/LoadingSplash';
 import ProjectCommentModal from '../../components/Modals/ProjectCommentModal/ProjectCommentModal';
+import ProjectUpvote from '../../components/ProjectUpvote/ProjectUpvote';
 
 const FIND_PROJECT = gql`
   query projectById($project_id:String) {
@@ -23,16 +24,22 @@ const FIND_PROJECT = gql`
         cons,
         interestRating
       },
-      created_at
+      created_at,
+      upvote,
+      upvoters,
+      website,
+      twitter,
+      facebook,
+      instagram
     }
   }
 `;
 @inject('AuthStore', 'ProjectStore')
 @observer
 class ProjectIndexPage extends Component {
-
   render() {
     const slug = this.props.match.params.project_slug;
+    const upvoter = this.props.AuthStore.getEmail();
     return(
       <React.Fragment>
       <Query
@@ -43,6 +50,7 @@ class ProjectIndexPage extends Component {
           if (loading) return <LoadingSplash/>;
           if (error) return error;
           const created_at = data.projectById.created_at;
+          const upvoters = [...data.projectById.upvoters];
           return (
             <div className="container small center">
               <header className="row project__header jc-sb ai-c">
@@ -104,7 +112,6 @@ class ProjectIndexPage extends Component {
                               </div>
                             </div>
                             <button className="btn btn-secondary" onClick={() => {
-                              console.log(this.props.ProjectStore.modalOpen);
                               this.props.ProjectStore.toggleCommentModal(true);                   
                             }}>
                               Give Feedback
@@ -124,15 +131,15 @@ class ProjectIndexPage extends Component {
                 </main>
                 <aside>
                   <div className="project__upvote ">
-                    <p className="bold uppercase btn btn-primary no-margin">upvote 1,600</p>
+                    <ProjectUpvote upvoterList={upvoters} upvoters={upvoter} projectId={slug} upvoteCount={data.projectById.upvote}/>
                   </div>
-                  <div className="row project__website-link jc-sb ai-c">
+                  <a href={"http://" + data.projectById.website} target="_blank" className="row project__website-link jc-sb ai-c td-n">
                     <div className="column">
                       <p className="bold">Website</p>
-                      <p>www.project.com</p>
+                      <p>{data.projectById.website}</p>
                     </div>
                     <img src={require('../../assets/002-scale-symbol.png')} className="logo small" alt="External Link Button"/>
-                  </div>
+                  </a>
                   <div className="about__creator">
                     <h4 className="no-margin">Tyrel Chambers</h4>  
                     <p>

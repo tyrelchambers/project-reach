@@ -17,6 +17,10 @@
   }
 }
 
+.btn.wide {
+  width: 100%;
+}
+
 .btn-primary {
   background-color: $secondary;
   color: white;
@@ -33,4 +37,8 @@
   &:hover {
     background-color: darken($purple, 5%);
   }
+}
+
+.btn.disabled {
+  background-color: $nav-primary !important;
 }
